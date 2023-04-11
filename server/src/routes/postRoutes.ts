@@ -5,12 +5,13 @@ import {
   deletePost,
   updatePost,
 } from "../controller/postController";
+import protect from "../middleware/authMiddleware";
 
 const router: Router = Router();
 
-router.post("/", createPost);
-router.get("/", getAllPosts);
-router.delete("/posts/:id", deletePost);
-router.patch("/posts/:id", updatePost);
+router.post("/", protect, createPost);
+router.get("/", protect, getAllPosts);
+router.delete("/:id", protect, deletePost);
+router.patch("/:id", protect, updatePost);
 
 export default router;
