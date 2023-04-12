@@ -16,7 +16,6 @@ export const getAllPosts = async (
   req: CustomRequest,
   res: Response
 ): Promise<void> => {
-  console.log(req.user);
   const posts = await Post.find({ user: req.user?.userId })
     .populate("user", "-password")
     .exec();
