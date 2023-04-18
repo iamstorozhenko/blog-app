@@ -8,11 +8,11 @@ interface CustomRequest extends Request {
   user?: IUser;
 }
 
-// @desc Get all posts
-// @route GET /posts/
-// @access Public
+// @desc Get my posts
+// @route GET my/posts/
+// @access Private
 
-export const getAllPosts = async (
+export const getMyPosts = async (
   req: CustomRequest,
   res: Response
 ): Promise<void> => {
@@ -20,6 +20,23 @@ export const getAllPosts = async (
     .populate("user", "-password")
     .exec();
   res.status(200).json(posts);
+};
+
+// @desc Get all posts
+// @route GET /posts
+// @access Public
+
+export const getAllPosts = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const posts: IPost[] = await Post.find({}).populate("user", "name");
+    res.status(200).json({ posts });
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+    return;
+  }
 };
 
 // @desc Create post
@@ -40,11 +57,14 @@ export const createPost = async (
       user: userId,
       avatarUrl,
     });
-    const savePost = await post.save();
-    res.json(savePost);
+    // const savePost = await post.save();
+    // res.json(savePost);
+    const savedPost = await post.populate("user", "name"); // populate the user field with the user document and only include the 'name' field
+    res.json(savedPost);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Server error" });
+    return;
   }
 };
 

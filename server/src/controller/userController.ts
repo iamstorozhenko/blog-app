@@ -89,6 +89,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
 
   if (!isMatch) {
     res.status(401).json({ error: "Invalid email or password" });
+    return;
   }
 
   // Generate jwt
