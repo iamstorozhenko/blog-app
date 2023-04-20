@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { loginUser } from "../features/auth/authSlice";
-import { useAppDispatch } from "../features/hooks/hooks";
+import { loginUser } from "../../features/auth/authSlice";
+import { useAppDispatch } from "../../features/hooks/hooks";
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 interface LoginData {
   email: string;
@@ -23,7 +24,6 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     try {
       const { payload } = (await dispatch(loginUser(formData))) as {
         payload: any;
@@ -35,13 +35,11 @@ const Login: React.FC = () => {
     } catch (error) {
       console.error("Login error", error);
     }
-    // console.log(formData);
-    // setFormData({ email: "", password: "" });
   };
 
   return (
     <div>
-      <h1>Login page</h1>
+      {/* <h1>Login page</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="email"
@@ -58,7 +56,39 @@ const Login: React.FC = () => {
           onChange={handleInputChange}
         />
         <button type="submit">Login</button>
-      </form>
+      </form> */}
+      <div className="login-page">
+        <form className="login-form" onSubmit={handleSubmit}>
+          <h2>Login Page</h2>
+          <div className="form-group">
+            <label>Email:</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <label >Password:</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleInputChange}
+            />
+          </div>
+          <button type="submit" className='login-btn'>Login</button>
+          <div className="create-account">
+            <p>Don't have an account?</p>
+            <a href="#">Create one</a>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

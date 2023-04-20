@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { RootState } from "@/src/app/store";
 import axios from "axios";
 
 interface LoginResponse {
@@ -72,10 +73,16 @@ const authSlice = createSlice({
     });
     builder.addCase(loginUser.rejected, (state, action) => {
       state.isLoading = false;
+      state.isAuthenticated = false;
     });
   },
 });
 
-export default authSlice.reducer;
-
 export const { logout } = authSlice.actions;
+
+export const selectUser = (state: RootState) => state.auth.user;
+export const selectIsAuthenticated = (state: RootState) =>
+  state.auth.isAuthenticated;
+export const selectIsLoading = (state: RootState) => state.auth.isLoading;
+export const selectError = (state: RootState) => state.auth.error;
+export default authSlice.reducer;
