@@ -11,7 +11,7 @@ interface IPostUser {
   name: string;
 }
 
-interface IPost {
+export interface IPost {
   _id: string;
   title: string;
   text: string;
@@ -83,7 +83,6 @@ const Home: React.FC = () => {
     const postToEdit = posts.find((post) => post._id === postId);
 
     if (user?._id === postToEdit?.user._id) {
-      // setModalActive(true);
       setModalEditPostActive(true);
       setText(postToEdit?.text || "");
     } else {
@@ -123,7 +122,6 @@ const Home: React.FC = () => {
           });
         });
 
-        // setModalActive(false);
         setModalEditPostActive(false);
       }
     } catch (error) {
@@ -143,10 +141,10 @@ const Home: React.FC = () => {
 
       <Header
         name={user?.name}
-        // active={modalActive}
-        // setActive={setModalActive}
         active={modalCreatePostActive}
         setActive={setModalCreatePostActive}
+        posts={posts}
+        setPosts={setPosts}
       />
       <div className="wrapper">
         <div className="left"></div>

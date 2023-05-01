@@ -8,14 +8,23 @@ import {
 import { useAppDispatch } from "../../features/hooks/hooks";
 import "./Header.css";
 import ModalCreatePost from "../modal/ModalCreatePost";
+import { IPost } from "../../pages/Home/Home";
 
 interface HeaderProps {
   name?: string;
   active: boolean;
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
+  posts: IPost[];
+  setPosts: React.Dispatch<React.SetStateAction<IPost[]>>;
 }
 
-const Header: React.FC<HeaderProps> = ({ name, active, setActive }) => {
+const Header: React.FC<HeaderProps> = ({
+  name,
+  active,
+  setActive,
+  posts,
+  setPosts,
+}) => {
   const [title, setTitle] = useState<string>("");
   const [text, setText] = useState<string>("");
 
@@ -56,6 +65,8 @@ const Header: React.FC<HeaderProps> = ({ name, active, setActive }) => {
     setActive(false);
     setTitle("");
     setText("");
+
+    setPosts((prevPosts) => [post, ...prevPosts]);
   };
 
   return (
