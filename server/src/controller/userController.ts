@@ -49,7 +49,7 @@ export const createUser = async (
     { userId: createdUser._id },
     process.env.JWT_ACCESS_TOKEN as Secret,
     {
-      expiresIn: "1d",
+      expiresIn: "5d",
     }
   );
 
@@ -97,7 +97,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
     { userId: user._id },
     process.env.JWT_ACCESS_TOKEN as Secret,
     {
-      expiresIn: "1d",
+      expiresIn: "5d",
     }
   );
 

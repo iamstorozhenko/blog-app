@@ -108,21 +108,29 @@ export const updatePost = async (
 // @access Public
 
 export const deletePost = async (
-  req: Request,
+  req: CustomRequest,
   res: Response
 ): Promise<void> => {
   const postId = req.params.id;
 
   try {
-    const doc = await Post.findByIdAndDelete({ _id: postId }).exec();
+    const post = await Post.findById(postId);
 
-    if (!doc) {
+    if (!post) {
       res.status(404).json({ error: "Post not found" });
+      return;
     }
 
-    res.json({ message: "Post deleted succesfully" });
+    if (post.user.toString() !== req.user?.userId) {
+      res.status(401).json({ error: "Not authorized" });
+      return;
+    }
+
+    await post.deleteOne();
+
+    res.status(200).json({ message: "Post deleted successfully" });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Can't delete this post" });
+    console.log(error);
+    res.status(500).json({ error: "Server error" });
   }
 };

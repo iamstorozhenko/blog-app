@@ -39,24 +39,6 @@ const Login: React.FC = () => {
 
   return (
     <div>
-      {/* <h1>Login page</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter your email"
-          value={formData.email}
-          onChange={handleInputChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter your password"
-          value={formData.password}
-          onChange={handleInputChange}
-        />
-        <button type="submit">Login</button>
-      </form> */}
       <div className="login-page">
         <form className="login-form" onSubmit={handleSubmit}>
           <h2>Login Page</h2>
@@ -85,7 +67,7 @@ const Login: React.FC = () => {
           <button type="submit" className='login-btn'>Login</button>
           <div className="create-account">
             <p>Don't have an account?</p>
-            <a href="#">Create one</a>
+            <a href="/users/register">Create one</a>
           </div>
         </form>
       </div>

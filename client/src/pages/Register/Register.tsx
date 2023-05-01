@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { registerUser } from "../../features/auth/authSlice";
+import { useAppDispatch } from "../../features/hooks/hooks";
+import { useNavigate } from "react-router-dom";
 import "./Register.css";
 
 const Register: React.FC = () => {
@@ -8,6 +11,9 @@ const Register: React.FC = () => {
     password: "",
   });
 
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
@@ -16,10 +22,22 @@ const Register: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // handle form submission logic here
     console.log(formData);
+    e.preventDefault();
+    try {
+      const { payload } = (await dispatch(registerUser(formData))) as {
+        payload: any;
+      };
+      if (payload.token) {
+        navigate("/");
+      }
+      console.log("User created successfully", payload);
+    } catch (error) {
+      console.error("User creation error", error);
+    }
   };
   return (
     <div className="signup-page">
@@ -58,7 +76,9 @@ const Register: React.FC = () => {
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit" className='sign-btn'>Sign Up</button>
+        <button type="submit" className="sign-btn">
+          Sign Up
+        </button>
         <div className="login-link">
           <p>Already have an account?</p>
           <a href="#">Log in</a>

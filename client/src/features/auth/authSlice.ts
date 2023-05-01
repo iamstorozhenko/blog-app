@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { RootState } from "@/src/app/store";
+import { RootState } from "../../app/store";
 import axios from "axios";
 
 interface LoginResponse {
@@ -17,6 +17,7 @@ interface LoginState {
 }
 
 interface LoginData {
+  name?: string;
   email: string;
   password: string;
 }
@@ -28,6 +29,29 @@ export const loginUser = createAsyncThunk<LoginResponse, LoginData>(
       const response = await axios.post<LoginResponse>(
         "http://localhost:3500/users/login",
         {
+          email,
+          password,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.response?.data);
+      }
+      throw error;
+    }
+  }
+);
+
+export const registerUser = createAsyncThunk<LoginResponse, LoginData>(
+  "auth/login",
+  async ({ name, email, password }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post<LoginResponse>(
+        "http://localhost:3500/users/register",
+        {
+          name,
           email,
           password,
         }
@@ -81,6 +105,7 @@ const authSlice = createSlice({
 export const { logout } = authSlice.actions;
 
 export const selectUser = (state: RootState) => state.auth.user;
+export const selectUserId = (state: RootState) => state.auth.user?._id;
 export const selectIsAuthenticated = (state: RootState) =>
   state.auth.isAuthenticated;
 export const selectIsLoading = (state: RootState) => state.auth.isLoading;
