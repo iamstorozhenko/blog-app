@@ -16,3 +16,28 @@ Technologies used:
 * TypeScript for static typing
 * Redux Toolkit for state management
 * Redux Persist for storing data in local storage
+
+Sign up page: 
+
+<img width="1431" alt="Screenshot 2023-05-02 at 20 55 23" src="https://user-images.githubusercontent.com/79382395/235746480-22c7d7b9-4d4d-43d3-9ce1-5be4f3e19bf8.png">
+
+Main page: 
+
+<img width="1413" alt="Screenshot 2023-05-02 at 20 54 19" src="https://user-images.githubusercontent.com/79382395/235746664-8cb6a2b4-51ad-4ab2-86c4-49da49cc8295.png">
+
+
+Create post: 
+
+<img width="1427" alt="Screenshot 2023-05-02 at 20 54 07" src="https://user-images.githubusercontent.com/79382395/235746840-402441fe-841d-4595-bf48-7f6620263d42.png">
+
+
+
+Edit post:
+
+<img width="1410" alt="Screenshot 2023-05-02 at 20 54 51" src="https://user-images.githubusercontent.com/79382395/235746717-3a21543e-93f1-4626-8fc1-598ba7d28aa9.png">
+st:
+
+
+
+
+
