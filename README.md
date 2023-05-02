@@ -36,7 +36,8 @@ Create post:
 
 Edit post:
 
-<img width="1410" alt="Screenshot 2023-05-02 at 20 54 51" src="https://user-images.githubusercontent.com/79382395/235746717-3a21543e-93f1-4626-8fc1-598ba7d28aa9.png">
+<img width="1410" alt="Screenshot 2023-05-02 at 20 54 51" src="https://user-images.githubusercontent.com/79382395/235748592-ef54c08b-f707-467c-9d1a-577d265ba5a0.png">
+
 
 
 
