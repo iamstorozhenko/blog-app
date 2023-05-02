@@ -6,6 +6,7 @@ Features:
 * Create, read, update and delete blog posts
 * Only the user who created a post can edit or delete it
 * Authentication with JWT (JSON Web Tokens)
+* Upon logging out, the user's token is removed from local storage, so they are no longer able to view any posts until they log back in
 * Redux Toolkit for state management
 * Redux Persist for storing data in local storage
 
