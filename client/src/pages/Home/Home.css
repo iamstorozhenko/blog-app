@@ -44,8 +44,21 @@ h3 {
 .delete-btn {
   width: 30px;
   height: 30px;
+  border: none;
+  border-radius: 4px;
 }
 
 .edit-btn {
   margin-right: 15px;
+}
+
+.edit-btn:hover {
+  background-color: #f0a04b;
+  transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+  /* background-color: #d21312; */
+  background-color: #b04759;
+  transition: all 0.3s ease;
 }

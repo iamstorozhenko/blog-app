@@ -5,7 +5,6 @@ const postSchema: Schema = new Schema(
   {
     title: {
       type: String,
-      required: [true, "Please create title for your post"],
     },
     text: {
       type: String,

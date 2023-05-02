@@ -81,7 +81,7 @@ const Register: React.FC = () => {
         </button>
         <div className="login-link">
           <p>Already have an account?</p>
-          <a href="#">Log in</a>
+          <a href="/users/login">Log in</a>
         </div>
       </form>
     </div>

@@ -9,12 +9,13 @@ import { useAppDispatch } from "../../features/hooks/hooks";
 import "./Header.css";
 import ModalCreatePost from "../modal/ModalCreatePost";
 import { IPost } from "../../pages/Home/Home";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 interface HeaderProps {
   name?: string;
   active: boolean;
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
-  posts: IPost[];
   setPosts: React.Dispatch<React.SetStateAction<IPost[]>>;
 }
 
@@ -22,7 +23,6 @@ const Header: React.FC<HeaderProps> = ({
   name,
   active,
   setActive,
-  posts,
   setPosts,
 }) => {
   const [title, setTitle] = useState<string>("");
@@ -82,17 +82,21 @@ const Header: React.FC<HeaderProps> = ({
       />
       <nav>
         <div className="logo">
-          <a href="#">Blogster</a>
+          <a href="/">Blogster</a>
         </div>
         <div className="nav-links">
           <p>Hello, {name}</p>
           <ul>
             <li>
-              <button onClick={handleClick}>Create Post</button>
+              <button onClick={handleClick} className="create-btn">
+                Create Post
+              </button>
             </li>
             {isAuthenticated && (
               <li>
-                <button onClick={handleLogout}>Exit</button>
+                <button onClick={handleLogout} className="exit-btn">
+                  <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                </button>
               </li>
             )}
           </ul>
