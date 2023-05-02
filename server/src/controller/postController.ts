@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { IPost } from "../types/IPost";
 import { IUser } from "../types/IUser";
 import Post from "../models/postModel";
-import User from "../models/userModel";
 
 interface CustomRequest extends Request {
   user?: IUser;
@@ -57,9 +56,8 @@ export const createPost = async (
       user: userId,
       avatarUrl,
     });
-    // const savePost = await post.save();
-    // res.json(savePost);
-    const savedPost = await post.populate("user", "name"); // populate the user field with the user document and only include the 'name' field
+
+    const savedPost = await post.populate("user", "name");
     res.json(savedPost);
   } catch (error) {
     console.log(error);
@@ -77,7 +75,6 @@ export const updatePost = async (
   res: Response
 ): Promise<void> => {
   const postId = req.params.id;
-
   const { title, text, avatarUrl } = req.body;
   try {
     const updatedPost = await Post.findByIdAndUpdate(
@@ -91,11 +88,9 @@ export const updatePost = async (
         new: true,
       }
     ).exec();
-
     if (!updatedPost) {
       res.status(404).json({ error: "Post not found" });
     }
-
     res.json(updatedPost);
   } catch (error) {
     console.log(error);
@@ -112,22 +107,17 @@ export const deletePost = async (
   res: Response
 ): Promise<void> => {
   const postId = req.params.id;
-
   try {
     const post = await Post.findById(postId);
-
     if (!post) {
       res.status(404).json({ error: "Post not found" });
       return;
     }
-
     if (post.user.toString() !== req.user?.userId) {
       res.status(401).json({ error: "Not authorized" });
       return;
     }
-
     await post.deleteOne();
-
     res.status(200).json({ message: "Post deleted successfully" });
   } catch (error) {
     console.log(error);
