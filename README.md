@@ -16,8 +16,7 @@ Technologies used:
 * React for frontend UI
 * Node.js (Express.js) for backend runtime environment
 * TypeScript for static typing
-* Redux Toolkit for state management
-* Redux Persist for storing data in local storage
+
 
 Sign up page: 
 
